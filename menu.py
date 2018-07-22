@@ -14,7 +14,12 @@ def banner(msg, style='banner'):
 
 def pcb_print(pcb_info):
     print('\033[96m', end='')
-    tp.table(pcb_info, headers=['PID', 'Priority', 'State'], width=12)
+    tp.table(pcb_info, headers=['PID', 'Arrival Time', 'Burst Time', 'Priority', 'State'], width=12)
+    print('\033[0m', end='')
+
+def scheduler_print(result):
+    print('\033[96m', end='')
+    tp.table(result, headers=['PID', 'Arrival Time', 'Burst Time', 'Priority', 'Completion Time', 'Turn Around Time', 'Waiting Time'], width=12)
     print('\033[0m', end='')
 
 def main_menu():
@@ -23,8 +28,10 @@ def main_menu():
     banner('<Jing Su> (47528095)', style='clean')
     info('\nProject parts:\n')
     guide('1) PCB Queue Manipulation')
-    guide('2) FCFS Scheduling')
-    guide('3) Exit\n')
+    guide('2) Run FCFS Scheduler on the Ready queue')
+    guide('3) Run Non-preemptive Priority Scheduler on the Ready queue')
+    guide('4) Run Round-Robin Scheduler on the Ready queue')
+    guide('5) Exit\n')
     return nav('Please input part index: ')
 
 def pcb_menu_header():
@@ -32,14 +39,20 @@ def pcb_menu_header():
     banner('PCB Queue Manipulation')
     banner('<Jing Su> (47528095)', style='clean')
 
+def scheduler_menu_header(title):
+    clear()
+    banner(f'Run {title} Scheduler on the Ready queue')
+    banner('<Jing Su> (47528095)', style='clean')
+
 def pcb_main_menu():
     pcb_menu_header()
     info('\nManipulation Operations:\n')
-    guide('1) Add a PCB to a queue')
-    guide('2) Delete a PCB from a queue')
-    guide('3) Insepect a specific PCB')
-    guide('4) Print a queue')
-    guide('5) Exit\n')
+    guide('1) Import processes from text file')
+    guide('2) Add a PCB to a queue')
+    guide('3) Delete a PCB from a queue')
+    guide('4) Insepect a specific PCB')
+    guide('5) Print a queue')
+    guide('6) Back to main menu\n')
     return nav('Please input operation index: ')
 
 def pcb_queue_menu():
@@ -58,10 +71,18 @@ def pcb_add_menu():
 
 def pcb_sub_menu(idx=0):
     prompt_text = (
+        'What is the input text file path: ',
         'What is the insert position PCB PID: ',
-        'What is the new PCB PID: ',
-        'What is the new PCB Priority: ',
-        'What is the new PCB State: ',
-        'What is the Target PCB PID'
+        'What is the new Process PID: ',
+        'What is the new Process Arrival Time: ',
+        'What is the new Process Burst Time: ',
+        'What is the new Process Priority: ',
+        'What is the Target PCB PID: '
     )[idx]
     return nav(prompt_text)
+
+def scheduler_menu(scheduler, queue_info):
+    scheduler_menu_header(scheduler)
+    info('\nThe initial Ready queue:\n')
+    pcb_print(queue_info)
+    info(f'\n{scheduler} output:\n')

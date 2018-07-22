@@ -1,13 +1,15 @@
 
 class PCB:
 
-    def __init__(self, pid, priority, state):
-        self.pid = pid
-        self.priority = priority
+    def __init__(self, pid, arrival_time, burst_time, priority, state='ready'):
+        self.pid = int(pid)
+        self.arrival_time = int(arrival_time)
+        self.burst_time = int(burst_time)
+        self.priority = int(priority)
         self.state = state
 
     def info(self):
-        return [self.pid, self.priority, self.state]
+        return [self.pid, self.arrival_time, self.burst_time, self.priority, self.state]
 
 
 class DoublyNode:
@@ -25,6 +27,9 @@ class PCBQueue:
         self.pids = set()
 
     def find(self, pid):
+        pid = int(pid)
+        if pid not in self.pids:
+            return None
         pointer = self.tail
         if pointer.data == None:
             return None
@@ -59,10 +64,15 @@ class PCBQueue:
         target = self.find(pid)
         if target is None:
             raise Exception('Target PID Not Found')
-        target.pre.next = target.next
-        target.next.pre = target.pre
-        del target
-        self.pids.remove(pid)
+        if target.pre:
+            target.pre.next = target.next
+        if target.next:
+            target.next.pre = target.pre
+        if not target.pre and not target.next:
+            target.data = None
+        else:
+            del target
+        self.pids.remove(int(pid))
 
     def inspect(self, pid):
         target = self.find(pid)

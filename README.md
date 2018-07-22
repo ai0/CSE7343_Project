@@ -1,11 +1,13 @@
 # CSE 7343 Course Project - Summer 18
 ###### *Jing Su*
 
+> This PDF file is generate by MarkDown, the source file is README.md. Since this report contains many screenshots with plain text, for better view experience, please view the GitHub rendered page in this link:
+
 ### Dependencies
 * Python 3.5+
-* [tableprint](https://github.com/nirum/tableprint) (Pretty console printing tabular data)
+* [tableprint](https://github.com/nirum/tableprint) (Handy console printing tabular data)
 
-### Usage
+### Execution
 #### Using pyenv:
 ```sh
 pyenv virtualenv 3.7.0 cse7343-env
@@ -17,8 +19,29 @@ pip3 install -r requirements.txt
 python3 main.py
 ```
 
+#### Interface
+![](screenshot/main-01.png)
+
 ### Part 1 - PCB
-Python3 to implemented a PCBQueue with doubly linked list. It used a class with pid, priority, state, jobtime property as the PCB data structure. For the adding, deleting, and inspecting I use a simply loop over the linked list as the algorithm in this my very initial demo version. Here is my PCB part code and screenshot in current phase version, and it may be changed in my final project report.
+![](screenshot/pcb-01.png)
+
+This part implemented a PCBQueue based on  doubly linked list. The linked list contains PCB. The PCB data structure used a class with (pid, arrival_time, burst_time, priority, state) properties. The PCBQueue has a cache to store all process PIDs in this queue to improve search performance and ensure no processes with the same PID exist.
+
+For the finding, loop over the linked list by pointer and compare the linked list node PID to target PID, return the found node or none.
+
+For the adding, first check is this queue empty, if empty then write data to tail pointer. Otherwise find the target insert position first, then insert the PCB to the linked list corresponding position.
+
+For deleting and inspecting, first find the target node, then remove the node from linked list and remove the PID from queue cache or display the node data in table format.
+
+#### Execution Trace Screenshot
+
+![](screenshot/pcb-02.png)
+![](screenshot/pcb-03.png)
+![](screenshot/pcb-04.png)
+![](screenshot/pcb-05.png)
+
+### Part 2 - Schedulers
+
 
 
 ### Programming Environment
