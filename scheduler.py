@@ -38,22 +38,6 @@ def fcfs_scheduler(queue, **kwargs):
     avg_wt = avg_time(result, 6)
     return result, avg_tat, avg_wt
 
-    # queue_data = get_queue_data(queue_info)
-    # sorted_queue = sorted(queue_data, key=lambda row: row['arrival_time'])
-    # time_count = 0
-    # result = []
-    # for process in sorted_queue:
-    #     if process['arrival_time'] > time_count:
-    #         time_count += process['arrival_time'] - time_count
-    #     time_count += process['burst_time']
-    #     process['completion_time'] = time_count
-    #     process['trun_around_time'] = process['completion_time'] - process['arrival_time']
-    #     process['waiting_time'] = process['trun_around_time'] - process['burst_time']
-    #     result.append(process.values())
-    # avg_tat = avg_time(sorted_queue, 'trun_around_time')
-    # avg_wt = avg_time(sorted_queue, 'waiting_time')
-    # return result, avg_tat, avg_wt
-
 def npp_scheduler(queue, **kwargs):
     timer = 0
     result = []
@@ -83,21 +67,6 @@ def npp_scheduler(queue, **kwargs):
     avg_tat = avg_time(result, 5)
     avg_wt = avg_time(result, 6)
     return result, avg_tat, avg_wt
-    # queue_data = get_queue_data(queue_info)
-    # sorted_queue = sorted(queue_data, key=cmp_to_key(npp_sort_cmp))
-    # time_count = 0
-    # result = []
-    # for process in sorted_queue:
-    #     if process['arrival_time'] > time_count:
-    #         time_count += process['arrival_time'] - time_count
-    #     time_count += process['burst_time']
-    #     process['completion_time'] = time_count
-    #     process['trun_around_time'] = process['completion_time'] - process['arrival_time']
-    #     process['waiting_time'] = process['trun_around_time'] - process['burst_time']
-    #     result.append(process.values())
-    # avg_tat = avg_time(sorted_queue, 'trun_around_time')
-    # avg_wt = avg_time(sorted_queue, 'waiting_time')
-    # return result, avg_tat, avg_wt
 
 def rr_scheduler(queue, **kwargs):
     q = kwargs['q']
