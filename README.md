@@ -33,6 +33,8 @@ For the adding, first check is this queue empty, if empty then write data to tai
 
 For deleting and inspecting, first find the target node, then remove the node from linked list and remove the PID from queue cache or display the node data in table format.
 
+This part code is implemented in `pcb.py` file.
+
 #### Execution Trace Screenshot
 
 ![](screenshot/pcb-02.png)
@@ -42,7 +44,7 @@ For deleting and inspecting, first find the target node, then remove the node fr
 
 ### Part 2 - Schedulers
 
-
+This part code is implemented in `scheduler.py` file.
 
 ### Programming Environment
 **OS:**         macOS 10.13.5

@@ -1,9 +1,8 @@
 import os
 import csv
 from pcb import PCB, PCBQueue
-from scheduling import fcfs_scheduler
+from scheduler import fcfs_scheduler, npp_scheduler, rr_scheduler
 from menu import *
-from helper import *
 
 ready_queue = PCBQueue()
 waiting_queue = PCBQueue()
@@ -75,15 +74,17 @@ def pcb_main():
         elif op == '6':
             break
 
-def fcfs_main():
+def scheduler_main(scheduler_name, scheduler_func, q=None):
     queue = ready_queue
     queue_info = queue.info()
     if queue_info == None:
         warn('\nEmpty Queue!\n')
     else:
-        scheduler_menu('FCFS', queue_info)
-        result = fcfs_scheduler(queue_info)
+        scheduler_menu(scheduler_name, queue_info)
+        result, avg_tat, avg_wt = scheduler_func(queue, q=q)
         scheduler_print(result)
+        info(f'Average Turn Around Time = {avg_tat}')
+        info(f'Average Waiting Time = {avg_wt}')
     nav('Press any key to continue...')
 
 def main():
@@ -92,11 +93,12 @@ def main():
         if op == '1':
             pcb_main()
         elif op == '2':
-            fcfs_main()
+            scheduler_main('FCFS', fcfs_scheduler)
         elif op == '3':
-            npp_main()
+            scheduler_main('Non-preemptive Priority', npp_scheduler)
         elif op == '4':
-            rr_main()
+            q = int(nav('Please input Q: '))
+            scheduler_main('Round-Robin Priority', rr_scheduler, q=q)
         elif op == '5':
             break
 

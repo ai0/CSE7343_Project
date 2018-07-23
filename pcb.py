@@ -7,6 +7,7 @@ class PCB:
         self.burst_time = int(burst_time)
         self.priority = int(priority)
         self.state = state
+        self.remaining_time = self.burst_time
 
     def info(self):
         return [self.pid, self.arrival_time, self.burst_time, self.priority, self.state]
@@ -24,7 +25,14 @@ class PCBQueue:
 
     def __init__(self):
         self.tail = DoublyNode(None)
-        self.pids = set()
+        self.pids = []
+
+    @property
+    def head(self):
+        pointer = self.tail
+        while pointer.pre:
+            pointer = pointer.pre
+        return pointer
 
     def find(self, pid):
         pid = int(pid)
@@ -58,7 +66,7 @@ class PCBQueue:
             new_node.next = target.next
             target.next.pre = new_node
             target.next = new_node
-        self.pids.add(pcb.pid)
+        self.pids.append(pcb.pid)
 
     def delete(self, pid):
         target = self.find(pid)
@@ -71,6 +79,8 @@ class PCBQueue:
         if not target.pre and not target.next:
             target.data = None
         else:
+            if self.tail == target:
+                self.tail = target.pre
             del target
         self.pids.remove(int(pid))
 

@@ -19,7 +19,7 @@ def pcb_print(pcb_info):
 
 def scheduler_print(result):
     print('\033[96m', end='')
-    tp.table(result, headers=['PID', 'Arrival Time', 'Burst Time', 'Priority', 'Completion Time', 'Turn Around Time', 'Waiting Time'], width=12)
+    tp.table(result, headers=['PID', 'AT', 'BT', 'P', 'CT', 'TAT', 'WT'], width=7)
     print('\033[0m', end='')
 
 def main_menu():
@@ -85,4 +85,5 @@ def scheduler_menu(scheduler, queue_info):
     scheduler_menu_header(scheduler)
     info('\nThe initial Ready queue:\n')
     pcb_print(queue_info)
-    info(f'\n{scheduler} output:\n')
+    info(f'\n{scheduler} Output:')
+    guide('(AT: Arrival Time, BT: Burst Time, P: Priority,\n CT: Completion Time, TAT: Turn Around Time, WT: Waiting Time)\n')
