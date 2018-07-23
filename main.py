@@ -98,7 +98,7 @@ def main():
             scheduler_main('Non-preemptive Priority', npp_scheduler)
         elif op == '4':
             q = int(nav('Please input Q: '))
-            scheduler_main('Round-Robin Priority', rr_scheduler, q=q)
+            scheduler_main('Round-Robin', rr_scheduler, q=q)
         elif op == '5':
             break
 
