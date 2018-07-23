@@ -114,5 +114,5 @@ def quick_load():
             queue.add(pcb, None)
 
 if __name__ == '__main__':
-    quick_load()
+    # quick_load()
     main()
