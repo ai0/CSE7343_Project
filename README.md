@@ -1,10 +1,6 @@
 # CSE 7343 Course Project - Summer 18
 ###### *Jing Su*
 
-> This PDF file is generate by MarkDown, the corresponding source file is `README.md`. Since this report contains many screenshots with plain text, for better view experience, please view the GitHub rendered page in this link:
-> [https://github.com/ai0/CSE7343_Project/blob/master/README.md](https://github.com/ai0/CSE7343_Project/blob/master/README.md)
-> Besides, the rendered html file under the same folder is also a better choice.
-
 ### Dependencies
 * Python 3.5+
 * [tableprint](https://github.com/nirum/tableprint) (Handy console printing tabular data)
